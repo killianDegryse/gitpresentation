@@ -26,7 +26,10 @@ function Test() {
         const preprod = gitgraph.branch({
           name: "PreProd",
           style: {
-            color: "#2919db"
+            color: "#2919db",
+            arrow:{
+              dot: "#2919db"
+            }
           }
         }).commit({
           subject: "Branch creation",
@@ -54,13 +57,13 @@ function Test() {
         const develop = gitgraph.branch("develop");
         develop.commit("Add TypeScript");
 
-        const aFeature = gitgraph.branch({
-          name: "a-feature",
+        const skDev = gitgraph.branch({
+          name: "sk-dev",
           style: {
             color: "#1de1c8"
           }
         });
-        aFeature
+        skDev
           .commit({
             subject: "Make it work",
             style: {
@@ -86,15 +89,15 @@ function Test() {
             }
           });
 
-        develop.merge(aFeature);
+        develop.merge(skDev);
         uat.merge(develop);
 
-        const aFeature2 = gitgraph.branch({
-          name: "a-feature2",
+        const czDev = gitgraph.branch({
+          name: "cz-dev",
           from: develop
         }).commit("Make it work 2");
 
-        develop.merge(aFeature2);
+        develop.merge(czDev);
         uat.merge(develop);
 
         preprod.merge(uat);
